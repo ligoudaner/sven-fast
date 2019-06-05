@@ -395,4 +395,17 @@ INSERT INTO `sys_user_token` VALUES (1, '47be7fed5a32af407d3ee7748541d198', '201
 INSERT INTO `sys_user_token` VALUES (2, '6ac5abe40b8b7d6aa4db882ddb153d30', '2019-06-05 04:23:01', '2019-06-04 16:23:01');
 COMMIT;
 
+DROP TABLE IF EXISTS `sys_oss`;
+
+-- 文件上传
+CREATE TABLE `sys_oss` (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `url` varchar(200) COMMENT 'URL地址',
+  `create_date` datetime COMMENT '创建时间',
+  PRIMARY KEY (`id`)
+) ENGINE=`InnoDB` DEFAULT CHARACTER SET utf8 COMMENT='文件上传';
+
+
+
+
 SET FOREIGN_KEY_CHECKS = 1;

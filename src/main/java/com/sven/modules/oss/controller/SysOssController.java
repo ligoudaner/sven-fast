@@ -22,6 +22,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.util.Arrays;
 import java.util.Date;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -101,7 +102,7 @@ public class SysOssController {
 
 		//上传文件
 		String suffix = file.getOriginalFilename().substring(file.getOriginalFilename().lastIndexOf("."));
-		String url = OSSFactory.build().uploadSuffix(file.getBytes(), suffix);
+		String url = OSSFactory.build().uploadSuffix(file.getInputStream(), suffix);
 
 		//保存文件信息
 		SysOssEntity ossEntity = new SysOssEntity();
@@ -119,8 +120,11 @@ public class SysOssController {
 	@PostMapping("/delete")
 	@RequiresPermissions("sys:oss:all")
 	public R delete(@RequestBody Long[] ids){
-		sysOssService.removeByIds(Arrays.asList(ids));
-
+		List<SysOssEntity> list= (List<SysOssEntity>) sysOssService.listByIds(Arrays.asList(ids));
+		for(SysOssEntity oss:list){
+			OSSFactory.build().delete(oss.getUrl());
+			sysOssService.removeById(oss.getId());
+		}
 		return R.ok();
 	}
 

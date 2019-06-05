@@ -51,4 +51,9 @@ public class AliyunCloudStorageService extends CloudStorageService {
     public String uploadSuffix(InputStream inputStream, String suffix) {
         return upload(inputStream, getPath(config.getAliyunPrefix(), suffix));
     }
+
+    @Override
+    public void delete(String key) {
+        //TODO
+    }
 }

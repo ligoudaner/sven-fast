@@ -67,4 +67,12 @@ public abstract class CloudStorageService {
      */
     public abstract String uploadSuffix(InputStream inputStream, String suffix);
 
+    /**
+     * 删除文件
+     * @param key 对象键
+     */
+    public abstract void delete(String key);
+
+
+
 }
