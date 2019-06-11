@@ -78,3 +78,6 @@ sven:
     # token有效时长，7天，单位秒
     expire: 604800
     header: token
+logging:
+  file: ./log/sven-fast.log
+
