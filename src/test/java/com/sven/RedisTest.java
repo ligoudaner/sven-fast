@@ -2,7 +2,6 @@ package com.sven;
 
 import com.sven.common.utils.RedisUtils;
 import com.sven.modules.sys.entity.SysUserEntity;
-import org.apache.commons.lang.builder.ToStringBuilder;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,7 +20,7 @@ public class RedisTest {
 		user.setEmail("qqq@qq.com");
 		redisUtils.set("user", user);
 
-		System.out.println(ToStringBuilder.reflectionToString(redisUtils.get("user", SysUserEntity.class)));
+//		System.out.println(ToStringBuilder.reflectionToString(redisUtils.get("user", SysUserEntity.class)));
 	}
 
 }

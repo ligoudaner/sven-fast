@@ -1,11 +1,11 @@
 package com.sven.modules.app.interceptor;
 
 
+import cn.hutool.core.util.StrUtil;
 import com.sven.common.exception.RRException;
-import io.jsonwebtoken.Claims;
-import com.sven.modules.app.utils.JwtUtils;
 import com.sven.modules.app.annotation.Login;
-import org.apache.commons.lang.StringUtils;
+import com.sven.modules.app.utils.JwtUtils;
+import io.jsonwebtoken.Claims;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Component;
@@ -42,12 +42,12 @@ public class AuthorizationInterceptor extends HandlerInterceptorAdapter {
 
         //获取用户凭证
         String token = request.getHeader(jwtUtils.getHeader());
-        if(StringUtils.isBlank(token)){
+        if(StrUtil.isBlank(token)){
             token = request.getParameter(jwtUtils.getHeader());
         }
 
         //凭证为空
-        if(StringUtils.isBlank(token)){
+        if(StrUtil.isBlank(token)){
             throw new RRException(jwtUtils.getHeader() + "不能为空", HttpStatus.UNAUTHORIZED.value());
         }
 

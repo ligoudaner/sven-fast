@@ -1,9 +1,9 @@
 package com.sven.common.utils;
 
+import cn.hutool.core.util.StrUtil;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.sven.common.xss.SQLFilter;
-import org.apache.commons.lang.StringUtils;
 
 import java.util.Map;
 
@@ -42,7 +42,7 @@ public class Query<T> {
         String order = (String)params.get(Constant.ORDER);
 
         //前端字段排序
-        if(StringUtils.isNotEmpty(orderField) && StringUtils.isNotEmpty(order)){
+        if(StrUtil.isNotEmpty(orderField) && StrUtil.isNotEmpty(order)){
             if(Constant.ASC.equalsIgnoreCase(order)) {
                 return page.setAsc(orderField);
             }else {

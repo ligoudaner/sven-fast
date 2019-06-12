@@ -1,9 +1,9 @@
 package com.sven.common.aspect;
 
-import com.google.gson.Gson;
-import com.sven.common.utils.IPUtils;
+import cn.hutool.json.JSONUtil;
 import com.sven.common.annotation.SysLog;
 import com.sven.common.utils.HttpContextUtils;
+import com.sven.common.utils.IPUtils;
 import com.sven.modules.sys.entity.SysLogEntity;
 import com.sven.modules.sys.entity.SysUserEntity;
 import com.sven.modules.sys.service.SysLogService;
@@ -70,7 +70,7 @@ public class SysLogAspect {
 		//请求的参数
 		Object[] args = joinPoint.getArgs();
 		try{
-			String params = new Gson().toJson(args);
+			String params = JSONUtil.toJsonStr(args);
 			sysLog.setParams(params);
 		}catch (Exception e){
 

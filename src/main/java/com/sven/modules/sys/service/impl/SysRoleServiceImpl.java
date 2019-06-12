@@ -1,5 +1,6 @@
 package com.sven.modules.sys.service.impl;
 
+import cn.hutool.core.util.StrUtil;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
@@ -12,8 +13,6 @@ import com.sven.modules.sys.dao.SysRoleDao;
 import com.sven.modules.sys.entity.SysDeptEntity;
 import com.sven.modules.sys.entity.SysRoleEntity;
 import com.sven.modules.sys.service.*;
-import com.sven.modules.sys.service.*;
-import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -46,7 +45,7 @@ public class SysRoleServiceImpl extends ServiceImpl<SysRoleDao, SysRoleEntity> i
 		IPage<SysRoleEntity> page = this.page(
 				new Query<SysRoleEntity>().getPage(params),
 				new QueryWrapper<SysRoleEntity>()
-						.like(StringUtils.isNotBlank(roleName),"role_name", roleName)
+						.like(StrUtil.isNotBlank(roleName),"role_name", roleName)
 						.apply(params.get(Constant.SQL_FILTER) != null, (String)params.get(Constant.SQL_FILTER))
 		);
 

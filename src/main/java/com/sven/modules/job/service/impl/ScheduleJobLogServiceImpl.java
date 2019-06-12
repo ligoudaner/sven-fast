@@ -1,5 +1,6 @@
 package com.sven.modules.job.service.impl;
 
+import cn.hutool.core.util.StrUtil;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
@@ -8,7 +9,6 @@ import com.sven.common.utils.Query;
 import com.sven.modules.job.dao.ScheduleJobLogDao;
 import com.sven.modules.job.entity.ScheduleJobLogEntity;
 import com.sven.modules.job.service.ScheduleJobLogService;
-import org.apache.commons.lang.StringUtils;
 import org.springframework.stereotype.Service;
 
 import java.util.Map;
@@ -22,7 +22,7 @@ public class ScheduleJobLogServiceImpl extends ServiceImpl<ScheduleJobLogDao, Sc
 
 		IPage<ScheduleJobLogEntity> page = this.page(
 			new Query<ScheduleJobLogEntity>().getPage(params),
-			new QueryWrapper<ScheduleJobLogEntity>().like(StringUtils.isNotBlank(jobId),"job_id", jobId)
+			new QueryWrapper<ScheduleJobLogEntity>().like(StrUtil.isNotBlank(jobId),"job_id", jobId)
 		);
 
 		return new PageUtils(page);

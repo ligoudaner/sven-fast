@@ -1,5 +1,7 @@
 package com.sven.modules.sys.service.impl;
 
+import cn.hutool.core.util.RandomUtil;
+import cn.hutool.core.util.StrUtil;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
@@ -7,15 +9,13 @@ import com.sven.common.annotation.DataFilter;
 import com.sven.common.utils.Constant;
 import com.sven.common.utils.PageUtils;
 import com.sven.common.utils.Query;
+import com.sven.common.utils.ShiroUtils;
 import com.sven.modules.sys.dao.SysUserDao;
 import com.sven.modules.sys.entity.SysDeptEntity;
 import com.sven.modules.sys.entity.SysUserEntity;
 import com.sven.modules.sys.service.SysDeptService;
 import com.sven.modules.sys.service.SysUserRoleService;
-import com.sven.common.utils.ShiroUtils;
 import com.sven.modules.sys.service.SysUserService;
-import org.apache.commons.lang.RandomStringUtils;
-import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -50,7 +50,7 @@ public class SysUserServiceImpl extends ServiceImpl<SysUserDao, SysUserEntity> i
 		IPage<SysUserEntity> page = this.page(
 				new Query<SysUserEntity>().getPage(params),
 				new QueryWrapper<SysUserEntity>()
-						.like(StringUtils.isNotBlank(username),"username", username)
+						.like(StrUtil.isNotBlank(username),"username", username)
 						.apply(params.get(Constant.SQL_FILTER) != null, (String)params.get(Constant.SQL_FILTER))
 		);
 
@@ -67,7 +67,7 @@ public class SysUserServiceImpl extends ServiceImpl<SysUserDao, SysUserEntity> i
 	public void saveUser(SysUserEntity user) {
 		user.setCreateTime(new Date());
 		//sha256加密
-		String salt = RandomStringUtils.randomAlphanumeric(20);
+		String salt = RandomUtil.randomString(20);
 		user.setSalt(salt);
 		user.setPassword(ShiroUtils.sha256(user.getPassword(), user.getSalt()));
 		this.save(user);
@@ -79,7 +79,7 @@ public class SysUserServiceImpl extends ServiceImpl<SysUserDao, SysUserEntity> i
 	@Override
 	@Transactional(rollbackFor = Exception.class)
 	public void update(SysUserEntity user) {
-		if(StringUtils.isBlank(user.getPassword())){
+		if(StrUtil.isBlank(user.getPassword())){
 			user.setPassword(null);
 		}else{
 			SysUserEntity userEntity = this.getById(user.getUserId());

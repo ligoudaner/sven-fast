@@ -1,10 +1,10 @@
 package com.sven.modules.job.utils;
 
+import cn.hutool.core.util.StrUtil;
 import com.sven.common.utils.SpringContextUtils;
 import com.sven.modules.job.entity.ScheduleJobEntity;
 import com.sven.modules.job.entity.ScheduleJobLogEntity;
 import com.sven.modules.job.service.ScheduleJobLogService;
-import org.apache.commons.lang.StringUtils;
 import org.quartz.JobExecutionContext;
 import org.quartz.JobExecutionException;
 import org.slf4j.Logger;
@@ -65,7 +65,7 @@ public class ScheduleJob extends QuartzJobBean {
 
 			//任务状态    0：成功    1：失败
 			log.setStatus(1);
-			log.setError(StringUtils.substring(e.toString(), 0, 2000));
+			log.setError(StrUtil.sub(e.toString(), 0, 2000));
 		}finally {
 			scheduleJobLogService.save(log);
 		}

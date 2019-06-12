@@ -1,6 +1,7 @@
 package com.sven.modules.sys.service.impl;
 
 
+import cn.hutool.core.util.StrUtil;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.google.code.kaptcha.Producer;
@@ -9,7 +10,6 @@ import com.sven.common.utils.DateUtils;
 import com.sven.modules.sys.dao.SysCaptchaDao;
 import com.sven.modules.sys.entity.SysCaptchaEntity;
 import com.sven.modules.sys.service.SysCaptchaService;
-import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -28,7 +28,7 @@ public class SysCaptchaServiceImpl extends ServiceImpl<SysCaptchaDao, SysCaptcha
 
     @Override
     public BufferedImage getCaptcha(String uuid) {
-        if(StringUtils.isBlank(uuid)){
+        if(StrUtil.isBlank(uuid)){
             throw new RRException("uuid不能为空");
         }
         //生成文字验证码

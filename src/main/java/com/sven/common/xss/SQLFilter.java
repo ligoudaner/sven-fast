@@ -1,7 +1,7 @@
 package com.sven.common.xss;
 
+import cn.hutool.core.util.StrUtil;
 import com.sven.common.exception.RRException;
-import org.apache.commons.lang.StringUtils;
 
 /**
  * SQL过滤
@@ -15,14 +15,14 @@ public class SQLFilter {
      * @param str  待验证的字符串
      */
     public static String sqlInject(String str){
-        if(StringUtils.isBlank(str)){
+        if(StrUtil.isBlank(str)){
             return null;
         }
         //去掉'|"|;|\字符
-        str = StringUtils.replace(str, "'", "");
-        str = StringUtils.replace(str, "\"", "");
-        str = StringUtils.replace(str, ";", "");
-        str = StringUtils.replace(str, "\\", "");
+        str = StrUtil.replace(str, "'", "");
+        str = StrUtil.replace(str, "\"", "");
+        str = StrUtil.replace(str, ";", "");
+        str = StrUtil.replace(str, "\\", "");
 
         //转换成小写
         str = str.toLowerCase();

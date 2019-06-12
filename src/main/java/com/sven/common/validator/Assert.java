@@ -1,7 +1,7 @@
 package com.sven.common.validator;
 
+import cn.hutool.core.util.StrUtil;
 import com.sven.common.exception.RRException;
-import org.apache.commons.lang.StringUtils;
 
 /**
  * 数据校验
@@ -11,7 +11,7 @@ import org.apache.commons.lang.StringUtils;
 public abstract class Assert {
 
     public static void isBlank(String str, String message) {
-        if (StringUtils.isBlank(str)) {
+        if (StrUtil.isBlank(str)) {
             throw new RRException(message);
         }
     }

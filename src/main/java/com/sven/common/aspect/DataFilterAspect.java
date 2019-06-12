@@ -1,6 +1,7 @@
 package com.sven.common.aspect;
 
 
+import cn.hutool.core.util.StrUtil;
 import com.sven.common.annotation.DataFilter;
 import com.sven.common.exception.RRException;
 import com.sven.common.utils.Constant;
@@ -9,7 +10,6 @@ import com.sven.modules.sys.entity.SysUserEntity;
 import com.sven.modules.sys.service.SysDeptService;
 import com.sven.modules.sys.service.SysRoleDeptService;
 import com.sven.modules.sys.service.SysUserRoleService;
-import org.apache.commons.lang.StringUtils;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Before;
@@ -76,7 +76,7 @@ public class DataFilterAspect {
         DataFilter dataFilter = signature.getMethod().getAnnotation(DataFilter.class);
         //获取表的别名
         String tableAlias = dataFilter.tableAlias();
-        if(StringUtils.isNotBlank(tableAlias)){
+        if(StrUtil.isNotBlank(tableAlias)){
             tableAlias +=  ".";
         }
 
@@ -102,7 +102,7 @@ public class DataFilterAspect {
         sqlFilter.append(" (");
 
         if(deptIdList.size() > 0){
-            sqlFilter.append(tableAlias).append(dataFilter.deptId()).append(" in(").append(StringUtils.join(deptIdList, ",")).append(")");
+            sqlFilter.append(tableAlias).append(dataFilter.deptId()).append(" in(").append(StrUtil.join(",",deptIdList)).append(")");
         }
 
         //没有本部门数据权限，也能查询本人数据

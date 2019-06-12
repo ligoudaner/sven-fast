@@ -1,5 +1,6 @@
 package com.sven.modules.sys.service.impl;
 
+import cn.hutool.core.util.StrUtil;
 import com.sven.common.utils.Constant;
 import com.sven.modules.sys.dao.SysMenuDao;
 import com.sven.modules.sys.dao.SysUserDao;
@@ -8,7 +9,6 @@ import com.sven.modules.sys.entity.SysMenuEntity;
 import com.sven.modules.sys.entity.SysUserEntity;
 import com.sven.modules.sys.entity.SysUserTokenEntity;
 import com.sven.modules.sys.service.ShiroService;
-import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -40,7 +40,7 @@ public class ShiroServiceImpl implements ShiroService {
         //用户权限列表
         Set<String> permsSet = new HashSet<>();
         for(String perms : permsList){
-            if(StringUtils.isBlank(perms)){
+            if(StrUtil.isBlank(perms)){
                 continue;
             }
             permsSet.addAll(Arrays.asList(perms.trim().split(",")));

@@ -1,5 +1,6 @@
 package com.sven.modules.sys.controller;
 
+import cn.hutool.core.util.StrUtil;
 import com.sven.common.annotation.SysLog;
 import com.sven.common.exception.RRException;
 import com.sven.common.utils.Constant;
@@ -7,13 +8,9 @@ import com.sven.common.utils.R;
 import com.sven.modules.sys.entity.SysMenuEntity;
 import com.sven.modules.sys.service.ShiroService;
 import com.sven.modules.sys.service.SysMenuService;
-import org.apache.commons.lang.StringUtils;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Set;
@@ -43,7 +40,7 @@ public class SysMenuController extends AbstractController {
 	/**
 	 * 所有菜单列表
 	 */
-	@RequestMapping("/list")
+	@GetMapping("/list")
 	@RequiresPermissions("sys:menu:list")
 	public List<SysMenuEntity> list(){
 		List<SysMenuEntity> menuList = sysMenuService.list();
@@ -60,7 +57,7 @@ public class SysMenuController extends AbstractController {
 	/**
 	 * 角色授权菜单
 	 */
-	@RequestMapping("/perms")
+	@GetMapping("/perms")
 	@RequiresPermissions("sys:menu:perms")
 	public List<SysMenuEntity> perms(){
 		//只有超级管理员，才能查看所有管理员列表
@@ -74,7 +71,7 @@ public class SysMenuController extends AbstractController {
 	/**
 	 * 选择菜单(添加、修改菜单)
 	 */
-	@RequestMapping("/select")
+	@GetMapping("/select")
 	@RequiresPermissions("sys:menu:select")
 	public R select(){
 		//查询列表数据
@@ -94,7 +91,7 @@ public class SysMenuController extends AbstractController {
 	/**
 	 * 菜单信息
 	 */
-	@RequestMapping("/info/{menuId}")
+	@GetMapping("/info/{menuId}")
 	@RequiresPermissions("sys:menu:info")
 	public R info(@PathVariable("menuId") Long menuId){
 		SysMenuEntity menu = sysMenuService.getById(menuId);
@@ -105,7 +102,7 @@ public class SysMenuController extends AbstractController {
 	 * 保存
 	 */
 	@SysLog("保存菜单")
-	@RequestMapping("/save")
+	@PostMapping("/save")
 	@RequiresPermissions("sys:menu:save")
 	public R save(@RequestBody SysMenuEntity menu){
 		//数据校验
@@ -120,7 +117,7 @@ public class SysMenuController extends AbstractController {
 	 * 修改
 	 */
 	@SysLog("修改菜单")
-	@RequestMapping("/update")
+	@PostMapping("/update")
 	@RequiresPermissions("sys:menu:update")
 	public R update(@RequestBody SysMenuEntity menu){
 		//数据校验
@@ -135,9 +132,9 @@ public class SysMenuController extends AbstractController {
 	 * 删除
 	 */
 	@SysLog("删除菜单")
-	@RequestMapping("/delete")
+	@PostMapping("/delete/{menuId}")
 	@RequiresPermissions("sys:menu:delete")
-	public R delete(long menuId){
+	public R delete(@PathVariable("menuId") long menuId){
 		if(menuId <= 31){
 			return R.error("系统菜单，不能删除");
 		}
@@ -157,7 +154,7 @@ public class SysMenuController extends AbstractController {
 	 * 验证参数是否正确
 	 */
 	private void verifyForm(SysMenuEntity menu){
-		if(StringUtils.isBlank(menu.getName())){
+		if(StrUtil.isBlank(menu.getName())){
 			throw new RRException("菜单名称不能为空");
 		}
 
@@ -167,7 +164,7 @@ public class SysMenuController extends AbstractController {
 
 		//菜单
 		if(menu.getType() == Constant.MenuType.MENU.getValue()){
-			if(StringUtils.isBlank(menu.getUrl())){
+			if(StrUtil.isBlank(menu.getUrl())){
 				throw new RRException("菜单URL不能为空");
 			}
 		}

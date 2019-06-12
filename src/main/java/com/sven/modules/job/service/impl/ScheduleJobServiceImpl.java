@@ -1,5 +1,6 @@
 package com.sven.modules.job.service.impl;
 
+import cn.hutool.core.util.StrUtil;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
@@ -10,7 +11,6 @@ import com.sven.modules.job.dao.ScheduleJobDao;
 import com.sven.modules.job.entity.ScheduleJobEntity;
 import com.sven.modules.job.service.ScheduleJobService;
 import com.sven.modules.job.utils.ScheduleUtils;
-import org.apache.commons.lang.StringUtils;
 import org.quartz.CronTrigger;
 import org.quartz.Scheduler;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -48,7 +48,7 @@ public class ScheduleJobServiceImpl extends ServiceImpl<ScheduleJobDao, Schedule
 
 		IPage<ScheduleJobEntity> page = this.page(
 			new Query<ScheduleJobEntity>().getPage(params),
-			new QueryWrapper <ScheduleJobEntity>().like(StringUtils.isNotBlank(beanName),"bean_name", beanName)
+			new QueryWrapper <ScheduleJobEntity>().like(StrUtil.isNotBlank(beanName),"bean_name", beanName)
 		);
 
 		return new PageUtils(page);

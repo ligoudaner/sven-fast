@@ -1,14 +1,14 @@
 package com.sven.modules.oss.cloud;
 
+import cn.hutool.core.io.IORuntimeException;
+import cn.hutool.core.io.IoUtil;
 import com.qiniu.common.Zone;
 import com.qiniu.http.Response;
 import com.qiniu.storage.Configuration;
 import com.qiniu.storage.UploadManager;
 import com.qiniu.util.Auth;
 import com.sven.common.exception.RRException;
-import org.apache.commons.io.IOUtils;
 
-import java.io.IOException;
 import java.io.InputStream;
 
 /**
@@ -50,9 +50,9 @@ public class QiniuCloudStorageService extends CloudStorageService {
     @Override
     public String upload(InputStream inputStream, String path) {
         try {
-            byte[] data = IOUtils.toByteArray(inputStream);
+            byte[] data = IoUtil.readBytes(inputStream);
             return this.upload(data, path);
-        } catch (IOException e) {
+        } catch (IORuntimeException e) {
             throw new RRException("上传文件失败", e);
         }
     }

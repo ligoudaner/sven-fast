@@ -1,13 +1,13 @@
 package com.sven.modules.sys.controller;
 
+import cn.hutool.core.io.IoUtil;
 import com.sven.common.utils.R;
+import com.sven.common.utils.ShiroUtils;
 import com.sven.modules.sys.entity.SysUserEntity;
 import com.sven.modules.sys.form.SysLoginForm;
 import com.sven.modules.sys.service.SysCaptchaService;
 import com.sven.modules.sys.service.SysUserService;
 import com.sven.modules.sys.service.SysUserTokenService;
-import com.sven.common.utils.ShiroUtils;
-import org.apache.commons.io.IOUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -48,7 +48,7 @@ public class SysLoginController extends AbstractController {
 
 		ServletOutputStream out = response.getOutputStream();
 		ImageIO.write(image, "jpg", out);
-		IOUtils.closeQuietly(out);
+		IoUtil.close(out);
 	}
 
 	/**

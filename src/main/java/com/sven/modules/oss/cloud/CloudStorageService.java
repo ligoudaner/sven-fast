@@ -1,7 +1,7 @@
 package com.sven.modules.oss.cloud;
 
+import cn.hutool.core.util.StrUtil;
 import com.sven.common.utils.DateUtils;
-import org.apache.commons.lang.StringUtils;
 
 import java.io.InputStream;
 import java.util.Date;
@@ -28,7 +28,7 @@ public abstract class CloudStorageService {
         //文件路径
         String path = DateUtils.format(new Date(), "yyyyMMdd") + "/" + uuid;
 
-        if(StringUtils.isNotBlank(prefix)){
+        if(StrUtil.isNotBlank(prefix)){
             path = prefix + "/" + path;
         }
 

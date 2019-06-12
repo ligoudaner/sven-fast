@@ -1,5 +1,6 @@
 package com.sven.modules.sys.service.impl;
 
+import cn.hutool.core.util.StrUtil;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
@@ -8,10 +9,9 @@ import com.sven.common.exception.RRException;
 import com.sven.common.utils.PageUtils;
 import com.sven.common.utils.Query;
 import com.sven.modules.sys.dao.SysConfigDao;
+import com.sven.modules.sys.entity.SysConfigEntity;
 import com.sven.modules.sys.redis.SysConfigRedis;
 import com.sven.modules.sys.service.SysConfigService;
-import com.sven.modules.sys.entity.SysConfigEntity;
-import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -31,7 +31,7 @@ public class SysConfigServiceImpl extends ServiceImpl<SysConfigDao, SysConfigEnt
 		IPage<SysConfigEntity> page = this.page(
 			new Query<SysConfigEntity>().getPage(params),
 			new QueryWrapper<SysConfigEntity>()
-				.like(StringUtils.isNotBlank(paramKey),"param_key", paramKey)
+				.like(StrUtil.isNotBlank(paramKey),"param_key", paramKey)
 				.eq("status", 1)
 		);
 
@@ -83,7 +83,7 @@ public class SysConfigServiceImpl extends ServiceImpl<SysConfigDao, SysConfigEnt
 	@Override
 	public <T> T getConfigObject(String key, Class<T> clazz) {
 		String value = getValue(key);
-		if(StringUtils.isNotBlank(value)){
+		if(StrUtil.isNotBlank(value)){
 			return new Gson().fromJson(value, clazz);
 		}
 

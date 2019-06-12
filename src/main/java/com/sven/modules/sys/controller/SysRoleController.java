@@ -34,7 +34,7 @@ public class SysRoleController extends AbstractController {
 	/**
 	 * 角色列表
 	 */
-	@RequestMapping("/list")
+	@GetMapping("/list")
 	@RequiresPermissions("sys:role:list")
 	public R list(@RequestParam Map<String, Object> params){
 		PageUtils page = sysRoleService.queryPage(params);
@@ -45,7 +45,7 @@ public class SysRoleController extends AbstractController {
 	/**
 	 * 角色列表
 	 */
-	@RequestMapping("/select")
+	@GetMapping("/select")
 	@RequiresPermissions("sys:role:select")
 	public R select(){
 		List<SysRoleEntity> list = sysRoleService.list();
@@ -56,7 +56,7 @@ public class SysRoleController extends AbstractController {
 	/**
 	 * 角色信息
 	 */
-	@RequestMapping("/info/{roleId}")
+	@GetMapping("/info/{roleId}")
 	@RequiresPermissions("sys:role:info")
 	public R info(@PathVariable("roleId") Long roleId){
 		SysRoleEntity role = sysRoleService.getById(roleId);
@@ -76,7 +76,7 @@ public class SysRoleController extends AbstractController {
 	 * 保存角色
 	 */
 	@SysLog("保存角色")
-	@RequestMapping("/save")
+	@PostMapping("/save")
 	@RequiresPermissions("sys:role:save")
 	public R save(@RequestBody SysRoleEntity role){
 		ValidatorUtils.validateEntity(role);
@@ -90,7 +90,7 @@ public class SysRoleController extends AbstractController {
 	 * 修改角色
 	 */
 	@SysLog("修改角色")
-	@RequestMapping("/update")
+	@PostMapping("/update")
 	@RequiresPermissions("sys:role:update")
 	public R update(@RequestBody SysRoleEntity role){
 		ValidatorUtils.validateEntity(role);
@@ -104,7 +104,7 @@ public class SysRoleController extends AbstractController {
 	 * 删除角色
 	 */
 	@SysLog("删除角色")
-	@RequestMapping("/delete")
+	@PostMapping("/delete")
 	@RequiresPermissions("sys:role:delete")
 	public R delete(@RequestBody Long[] roleIds){
 		sysRoleService.deleteBatch(roleIds);
