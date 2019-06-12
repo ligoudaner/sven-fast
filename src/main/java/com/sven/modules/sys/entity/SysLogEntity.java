@@ -31,6 +31,10 @@ public class SysLogEntity implements Serializable {
 	private Long time;
 	//IP地址
 	private String ip;
+	//日志类型
+	private String type;
+	//异常信息
+	private String exception;
 	//创建时间
 	private Date createDate;
 
