@@ -30,7 +30,7 @@ public class SysMenuController extends AbstractController {
 	/**
 	 * 导航菜单
 	 */
-	@RequestMapping("/nav")
+	@GetMapping("/nav")
 	public R nav(){
 		List<SysMenuEntity> menuList = sysMenuService.getUserMenuList(getUserId());
 		Set<String> permissions = shiroService.getUserPermissions(getUserId());

@@ -6,10 +6,7 @@ import com.sven.modules.job.entity.ScheduleJobLogEntity;
 import com.sven.modules.job.service.ScheduleJobLogService;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.Map;
 
@@ -27,7 +24,7 @@ public class ScheduleJobLogController {
 	/**
 	 * 定时任务日志列表
 	 */
-	@RequestMapping("/list")
+	@GetMapping("/list")
 	@RequiresPermissions("sys:schedule:log")
 	public R list(@RequestParam Map<String, Object> params){
 		PageUtils page = scheduleJobLogService.queryPage(params);
@@ -38,7 +35,7 @@ public class ScheduleJobLogController {
 	/**
 	 * 定时任务日志信息
 	 */
-	@RequestMapping("/info/{logId}")
+	@GetMapping("/info/{logId}")
 	public R info(@PathVariable("logId") Long logId){
 		ScheduleJobLogEntity log = scheduleJobLogService.getById(logId);
 
