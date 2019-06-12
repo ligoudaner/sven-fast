@@ -311,7 +311,7 @@ CREATE TABLE `sys_config` (
 -- Records of sys_config
 -- ----------------------------
 BEGIN;
-INSERT INTO `sys_config` VALUES (1, ''CLOUD_STORAGE_CONFIG_KEY'', ''{\"type\":3,\"qiniuDomain\":\"http://7xqbwh.dl1.z0.glb.clouddn.com\",\"qiniuPrefix\":\"upload\",\"qiniuAccessKey\":\"NrgMfABZxWLo5B-YYSjoE8-AZ1EISdi1Z3ubLOeZ\",\"qiniuSecretKey\":\"uIwJHevMRWU0VLxFvgy0tAcOdGqasdtVlJkdy6vV\",\"qiniuBucketName\":\"ios-app\",\"aliyunDomain\":\"\",\"aliyunPrefix\":\"\",\"aliyunEndPoint\":\"\",\"aliyunAccessKeyId\":\"\",\"aliyunAccessKeySecret\":\"\",\"aliyunBucketName\":\"\",\"qcloudDomain\":\"https://conqueror-1251711161.cos.ap-chengdu.myqcloud.com/\",\"qcloudPrefix\":\"sven\",\"qcloudAppId\":1251711161,\"qcloudSecretId\":\"AKIDPi7SdcyHz52CKMkG7rkYBcu9Qce4rZdW\",\"qcloudSecretKey\":\"rX2LUSF4nLhuxpV5UjneKsERTJzjLm38\",\"qcloudBucketName\":\"conqueror-1251711161\",\"qcloudRegion\":\"ap-chengdu\"}'', 0, ''云存储配置信息'');
+INSERT INTO `sys_config` VALUES (1, ''CLOUD_STORAGE_CONFIG_KEY'', ''{\"type\":3,\"qiniuDomain\":\"http://7xqbwh.dl1.z0.glb.clouddn.com\",\"qiniuPrefix\":\"upload\",\"qiniuAccessKey\":\"NrgMfABZxWLo5B-YYSjoE8-AZ1EISdi1Z3ubLOeZ\",\"qiniuSecretKey\":\"uIwJHevMRWU0VLxFvgy0tAcOdGqasdtVlJkdy6vV\",\"qiniuBucketName\":\"ios-app\",\"aliyunDomain\":\"\",\"aliyunPrefix\":\"\",\"aliyunEndPoint\":\"\",\"aliyunAccessKeyId\":\"\",\"aliyunAccessKeySecret\":\"\",\"aliyunBucketName\":\"\"}'', 0, ''云存储配置信息'');
 COMMIT;
 
 -- ----------------------------
@@ -466,9 +466,6 @@ CREATE TABLE `sys_oss` (
 -- ----------------------------
 -- Records of sys_oss
 -- ----------------------------
-BEGIN;
-INSERT INTO `sys_oss` VALUES (2, ''https://conqueror-1251711161.cos.ap-chengdu.myqcloud.com/sven/20190605/4e11be39a89647618ec7e9d3adb48d7b.jpg'', ''2019-06-05 11:00:57'');
-COMMIT;
 
 -- ----------------------------
 -- Table structure for sys_role
