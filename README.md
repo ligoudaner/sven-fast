@@ -1,5 +1,5 @@
 **项目说明** 
-- 在renren-fast:https://gitee.com/renrenio/renren-fast开源项目的基础上增加了部门管理的功能（感谢人人开源）
+- 在renren-fast:https://gitee.com/renrenio/renren-fast 开源项目的基础上增加了部门管理的功能（感谢人人开源）
 - 支持MySQL、Oracle、SQL Server、PostgreSQL等主流数据库
 - 前端地址：https://github.com/ligoudaner/sven-fast-vue
 - 代码生成器：https://gitee.com/renrenio/renren-generator
