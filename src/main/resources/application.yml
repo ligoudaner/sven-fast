@@ -79,5 +79,6 @@ sven:
     expire: 604800
     header: token
 logging:
-  file: ./log/sven-fast.log
+  level:
+    com.sven: DEBUG
 

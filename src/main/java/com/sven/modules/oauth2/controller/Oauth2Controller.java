@@ -8,7 +8,9 @@ import com.sven.modules.oauth2.config.AuthConfig;
 import com.sven.modules.oauth2.model.AuthResponse;
 import com.sven.modules.oauth2.request.AuthQqRequest;
 import com.sven.modules.oauth2.request.AuthRequest;
+import com.sven.modules.oauth2.request.ResponseStatus;
 import com.sven.modules.sys.service.SysConfigService;
+import com.sven.modules.sys.service.SysUserTokenService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -25,6 +27,8 @@ public class Oauth2Controller {
 
     @Autowired
     private SysConfigService sysConfigService;
+    @Autowired
+    private SysUserTokenService sysUserTokenService;
 
 
     /**
@@ -47,7 +51,10 @@ public class Oauth2Controller {
         AuthConfig config = sysConfigService.getConfigObject(ConfigConstant.QQ_OAUTH_CONFIG_KEY, AuthConfig.class);
         AuthRequest authRequest = new AuthQqRequest(config);
         AuthResponse authResponse=authRequest.login(code);
-        //这里是将结果通过websocket返回给前端
-        SocketServer.sendMessage(JSONUtil.toJsonStr(authResponse),state);
+        if(authResponse.getCode()== ResponseStatus.SUCCESS.getCode()){
+            //这里是将结果通过websocket返回给前端
+            SocketServer.sendMessage(JSONUtil.toJsonStr(sysUserTokenService.createToken(1l)),state);
+        }
+
     }
 }
